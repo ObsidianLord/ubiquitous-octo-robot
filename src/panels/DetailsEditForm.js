@@ -39,6 +39,71 @@ export default class DetailsEditForm extends React.Component {
             paymentAccount: undefined,
             author: undefined
         };
+
+        this.onFundNameChange = this.onFundNameChange.bind(this)
+        this.onPriceChange = this.onPriceChange.bind(this)
+        this.onGoalChange = this.onGoalChange.bind(this)
+        this.onDescriptionChange = this.onDescriptionChange.bind(this)
+        this.onPaymentAccountChange = this.onPaymentAccountChange.bind(this)
+        this.onAuthorChange = this.onAuthorChange.bind(this)
+        this.canSubmitForm = this.canSubmitForm.bind(this)
+    }
+
+    onFundNameChange(event) {
+        const name = event.target.value
+        store.name = name
+        this.setState({name: name})
+    }
+
+    onPriceChange(event) {
+        let price = event.target.value
+        if (price === "") {
+            price = undefined
+        }
+
+        store.price = price
+        this.setState({price: price})
+    }
+
+    onGoalChange(event) {
+        let goal = event.target.value
+        if (goal === "") {
+            goal = undefined
+        }
+
+        store.goal = goal
+        this.setState({goal: goal})
+    }
+
+    onDescriptionChange(event) {
+        let description = event.target.value
+        if (description === "") {
+            description = undefined
+        }
+
+        store.description = description
+        this.setState({description: description})
+    }
+
+    onPaymentAccountChange(event) {
+        let paymentAccount = event.target.value
+        store.paymentAccount = paymentAccount
+        this.setState({paymentAccount: paymentAccount})
+    }
+
+    onAuthorChange(event) {
+        const author = event.target.value
+        store.author = author
+        this.setState({author: author})
+    }
+
+    canSubmitForm() {
+        const nameDefined = this.state.name !== undefined && this.state.name !== ""
+        const priceDefined = this.state.price !== undefined && this.state.price !== ""
+        const paymentAccountDefined = true // default value always chosen
+        const authorDefined = true // default value always chosen
+
+        return nameDefined && priceDefined && paymentAccountDefined && authorDefined
     }
 
     render() {
@@ -63,31 +128,31 @@ export default class DetailsEditForm extends React.Component {
                         top="Название сбора"
                         placeholder="Название сбора"
                         value={this.state.name}
-                        onChange={(e) => this.setState({name: e.target.value})}
+                        onChange={this.onFundNameChange}
                     />
                     <Input
                         type="number"
                         top="Сумма"
                         placeholder="Сколько нужно собрать"
-                        value={this.state.name}
-                        onChange={(e) => this.setState({name: e.target.value})}
+                        value={this.state.price}
+                        onChange={this.onPriceChange}
                     />
                     <Input
                         top="Цель"
                         placeholder="Например, лечение человека"
                         value={this.state.goal}
-                        onChange={(e) => this.setState({goal: e.target.value})}
+                        onChange={this.onGoalChange}
                     />
                     <Textarea
                         top="Описание"
                         placeholder="На что пойдут деньги и как они кому-то помогут?"
                         value={this.state.description}
-                        onChange={(e) => this.setState({description: e.target.value})}
+                        onChange={this.onDescriptionChange}
                     />
                     <Select
                         top="Куда получать деньги"
                         value={this.state.paymentAccount}
-                        onChange={(e) => this.setState({paymentAccount: e.target.value})}
+                        onChange={this.onPaymentAccountChange}
                     >
                         <option value="m">Мужской</option>
                         <option value="f">Женский</option>
@@ -97,7 +162,7 @@ export default class DetailsEditForm extends React.Component {
                     <Select
                         top="Автор"
                         value={this.state.author}
-                        onChange={(e) => this.setState({author: e.target.value})}
+                        onChange={this.onAuthorChange}
                     >
                         {
                             authors.map(author =>
@@ -109,7 +174,8 @@ export default class DetailsEditForm extends React.Component {
                 </FormLayout>
                 <FixedLayout vertical="bottom" filled>
                     <Div>
-                        <Button size="xl" stretched onClick={this.state.go} data-to="additional-details-edit-form">
+                        <Button size="xl" stretched disabled={!this.canSubmitForm()}
+                                onClick={this.state.go} data-to="additional-details-edit-form">
                             Далее
                         </Button>
                     </Div>

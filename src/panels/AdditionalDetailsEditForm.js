@@ -26,7 +26,6 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.state = {
             id: props.id,
             go: props.go,
-            store: store,
 
             fundEndsDefined: false,
             endsDate: undefined,
@@ -43,7 +42,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.onFundEndsChosen = this.onFundEndsChosen.bind(this)
         this.onDateChosen = this.onDateChosen.bind(this)
-        this.canSubmitForm = this.canSubmitForm.bind(this)
+            this.canSubmitForm = this.canSubmitForm.bind(this)
     }
 
     componentDidMount() {

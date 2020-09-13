@@ -1,4 +1,11 @@
-export const store = {};
+export const store = {
+    name: undefined,
+    price: undefined,
+    goal: undefined,
+    description: undefined,
+    paymentAccount: undefined,
+    author: undefined
+};
 
 export const fundTypes = {
     GOAL: 'GOLAR',
