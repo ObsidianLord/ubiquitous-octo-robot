@@ -15,7 +15,7 @@ const Home = ({ id, go }) => (
                 <Text weight="regular">Начните доброе дело.</Text>
             </Div>
             <Div>
-                <Button size="l" onClick={go} data-to="fund-pick">Создать Сбор</Button>
+                <Button size="l" onClick={go} data-to="type-choose">Создать Сбор</Button>
             </Div>
         </Div>
     </Panel>
