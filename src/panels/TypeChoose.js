@@ -12,7 +12,7 @@ import {store} from '../store'
 import {fundTypes} from '../store'
 
 const TypeChoose = ({ id, go }) => (
-	<Panel id={id} styles={{background: 'black'}} centered={true}>
+	<Panel id={id} centered={true}>
 		<PanelHeader>Тип сбора</PanelHeader>
 		<Group title="Fund type choose buttons">
 			<Banner
