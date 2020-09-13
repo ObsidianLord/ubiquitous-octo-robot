@@ -7,6 +7,7 @@ import Home from './panels/Home';
 import Persik from './panels/Persik';
 import TypeChoose from "./panels/TypeChoose";
 import DetailsEditForm from './panels/DetailsEditForm';
+import PrePost from './panels/PrePost';
 import AdditionalDetailsEditForm from "./panels/AdditionalDetailsEditForm";
 
 export default class App extends React.Component {
@@ -73,6 +74,7 @@ export default class App extends React.Component {
                 <DetailsEditForm id='details-edit-form-regular' go={this.go} />
                 <DetailsEditForm id='details-edit-form-goal' go={this.go} />
                 <AdditionalDetailsEditForm id='additional-details-edit-form' go={this.go} />
+                <PrePost id='pre-post' go={this.go} />
             </View>
         )
     }
