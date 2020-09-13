@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {store} from '../store'
+import {authors, store} from '../store'
 import Panel from "@vkontakte/vkui/dist/components/Panel/Panel";
 import PanelHeader from "@vkontakte/vkui/dist/components/PanelHeader/PanelHeader";
 import PanelHeaderButton from "@vkontakte/vkui/dist/components/PanelHeaderButton/PanelHeaderButton";
@@ -109,7 +109,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
                             name={"author"}
                     >
                         {
-                            this.state.availableAuthors.map(author =>
+                            authors.map(author =>
                                 (<option value={author.value}>{author.title}</option>)
                             )
                         }
