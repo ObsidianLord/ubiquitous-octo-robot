@@ -14,6 +14,7 @@ export default class App extends React.Component {
 
         this.state = {
             activePanel: "home",
+            history: []
         };
 
         // window.onpopstate = function(event) {
@@ -31,9 +32,19 @@ export default class App extends React.Component {
     }
 
     go(event){
-        this.setState({
-            activePanel: event.currentTarget.dataset.to
-        });
+        const toPanel = event.currentTarget.dataset.to
+        if (toPanel == "back") {
+            const previousPanel = this.state.history.pop()
+            console.log("BACK TO " + previousPanel)
+            this.setState({
+                activePanel: previousPanel
+            })
+        } else {
+            this.state.history.push(this.state.activePanel)
+            this.setState({
+                activePanel: toPanel
+            });
+        }
     };
 
     componentDidMount() {
