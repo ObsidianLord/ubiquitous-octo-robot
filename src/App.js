@@ -11,13 +11,14 @@ import AdditionalDetailsEditForm from "./panels/AdditionalDetailsEditForm";
 import PrePost from './panels/PrePost';
 import Feed from './panels/Feed';
 
+import FundDetails from './panels/FundDetails';
 
 export default class App extends React.Component {
     constructor(data) {
         super(data)
 
         this.state = {
-            activePanel: "home",
+            activePanel: "fund-details",
             history: []
         };
 
@@ -69,7 +70,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View activePanel={this.state.activePanel}>
+            <View activePanel={this.state.activePanel} header={this.state.activePanel !== 'fund-details'}>
                 <Home id='home' go={this.go} />
                 <Persik id='persik' go={this.go} />
                 <TypeChoose id='type-choose' go={this.go} />
@@ -78,7 +79,13 @@ export default class App extends React.Component {
                 <AdditionalDetailsEditForm id='additional-details-edit-form' go={this.go} />
                 <PrePost id='pre-post' go={this.go} />
                 <Feed id='feed' go={this.go} />
+                <FundDetails id='fund-details'/>
             </View>
+            // <View activePanel={this.state.activePanel}>
+            //     <FundDetails id='fundDetails' go={this.go} />
+            //     <Home id='home' go={this.go} />
+            //     <Persik id='persik' go={this.go} />
+            // </View>
         )
     }
 }
