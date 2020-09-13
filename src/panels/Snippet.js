@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
+import Subhead from '@vkontakte/vkui/dist/components/Typography/Subhead/Subhead';
 import Card from '@vkontakte/vkui/dist/components/Card/Card';
 import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
 import Separator from '@vkontakte/vkui/dist/components/Separator/Separator';
@@ -13,7 +14,7 @@ export default class Snippet extends React.Component {
 
         this.state = {
             description: "",
-            progressText: data.progressTest ? data.progressTest : "Помогите первым",
+            progressText: data.progressText ? data.progressText : "Помогите первым",
             progressValue: data.progressValue ? data.progressValue : 0,
             fundName: data.fundName ? data.fundName : "Добряши помогают котикам",
             author: data.author ? data.author : "Матвей Правосудов",
@@ -38,10 +39,12 @@ export default class Snippet extends React.Component {
                 <Separator />
                 <SimpleCell        
                   disabled
-                  after={<Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="outline" style={{marginRight: 0}}>Помочь</Button>}
+                  after={<Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="outline" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>}
                   description={<Progress value={this.state.progressValue} />}
                   >
-                    {this.state.progressText}
+                    <Subhead weight="regular">
+                        {this.state.progressText}
+                    </Subhead>
                 </SimpleCell>
             </Card>
         )
