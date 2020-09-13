@@ -11,6 +11,8 @@ import FormLayout from '@vkontakte/vkui/dist/components/FormLayout/FormLayout';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
 import Input from '@vkontakte/vkui/dist/components/Input/Input';
 import Select from '@vkontakte/vkui/dist/components/Select/Select';
+import Card from '@vkontakte/vkui/dist/components/Card/Card';
+
 
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -48,6 +50,11 @@ export default class DetailsEditForm extends React.Component {
                 >
                     {this.state.id == "details-edit-form-regular" ? "Регулярный сбор" : "Целевой сбор"}
                 </PanelHeader>
+                <Div>
+                    <Card size="l">
+                        <div style={{ height: 140 }} />
+                    </Card>
+                </Div>
                 <FormLayout style={{paddingBottom: 60}}>
                     <Input
                       top="Название сбора"
