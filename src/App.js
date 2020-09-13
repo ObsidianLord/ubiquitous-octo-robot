@@ -69,7 +69,8 @@ export default class App extends React.Component {
                 <Home id='home' go={this.go} />
                 <Persik id='persik' go={this.go} />
                 <TypeChoose id='type-choose' go={this.go} />
-                <DetailsEditForm id='details-edit-form' go={this.go} />
+                <DetailsEditForm id='details-edit-form-regular' go={this.go} />
+                <DetailsEditForm id='details-edit-form-goal' go={this.go} />
             </View>
         )
     }
