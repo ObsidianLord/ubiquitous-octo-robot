@@ -18,7 +18,7 @@ import {fundTypes} from '../store'
 const osName = platform();
 
 const TypeChoose = ({ id, go }) => (
-	<Panel id={id} centered={true}>
+    <Panel id={id} centered={true}>
         <PanelHeader
             left={<PanelHeaderButton onClick={go} data-to="back">
                       {osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
@@ -26,30 +26,30 @@ const TypeChoose = ({ id, go }) => (
         >
             Тип сбора
         </PanelHeader>
-		<Group title="Fund type choose buttons">
-			<Banner
-				before={<Icon28TargetOutline fill={"royalblue"}/>}
-				header="Целевой сбор"
-				subheader="Когда есть определённая цель"
-				asideMode="expand"
-				onClick={(event) => { store.fundType = fundTypes.GOAL; go(event) }}
+        <Group title="Fund type choose buttons">
+            <Banner
+                before={<Icon28TargetOutline fill={"royalblue"}/>}
+                header="Целевой сбор"
+                subheader="Когда есть определённая цель"
+                asideMode="expand"
+                onClick={(event) => { store.fundType = fundTypes.GOAL; go(event) }}
                 data-to="details-edit-form-goal"
-			/>
-			<Banner
-				before={<Icon28CalendarOutline fill={"royalblue"}/>}
-				header="Регулярный сбор"
-				subheader="Если помощь нужна ежемесячно"
-				asideMode="expand"
-				onClick={(event) => { store.fundType = fundTypes.REGULAR; go(event) }}
-				data-to="details-edit-form-regular"
-			/>
-		</Group>
-	</Panel>
+            />
+            <Banner
+                before={<Icon28CalendarOutline fill={"royalblue"}/>}
+                header="Регулярный сбор"
+                subheader="Если помощь нужна ежемесячно"
+                asideMode="expand"
+                onClick={(event) => { store.fundType = fundTypes.REGULAR; go(event) }}
+                data-to="details-edit-form-regular"
+            />
+        </Group>
+    </Panel>
 );
 
 TypeChoose.propTypes = {
-	id: PropTypes.string.isRequired,
-	go: PropTypes.func.isRequired
+    id: PropTypes.string.isRequired,
+    go: PropTypes.func.isRequired
 };
 
 export default TypeChoose;
