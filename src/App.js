@@ -6,6 +6,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
 import Persik from './panels/Persik';
+import { store } from './store';
 
 export default class App extends React.Component {
     constructor(data) {
