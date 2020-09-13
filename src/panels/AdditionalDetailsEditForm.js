@@ -17,6 +17,7 @@ import FormLayoutGroup from "@vkontakte/vkui/dist/components/FormLayoutGroup/For
 import Radio from "@vkontakte/vkui/dist/components/Radio/Radio";
 import Select from "@vkontakte/vkui/dist/components/Select/Select";
 import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
+import dateToFormat from "../utils";
 
 const osName = platform();
 
@@ -49,7 +50,6 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.onFundEndsChosen = this.onFundEndsChosen.bind(this)
         this.onDateChosen = this.onDateChosen.bind(this)
-        this.dateToFormat = this.dateToFormat.bind(this)
         this.canSubmitForm = this.canSubmitForm.bind(this)
     }
 
@@ -80,10 +80,6 @@ export default class AdditionalDetailsEditForm extends React.Component {
     onDateChosen(event) {
         const {name, value} = event.currentTarget
         console.log("onDateChosen")
-    }
-
-    dateToFormat(date) {
-        return date.getFullYear() + '-' + (date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
     }
 
     canSubmitForm() {
@@ -132,7 +128,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
                                top="Сбор завершится"
                                placeholder="Выберите дату"
                                name={"dateEnds"}
-                               min={this.dateToFormat(new Date)}
+                               min={dateToFormat(new Date())}
                                onChange={this.onDateChosen}
                                required
                         />
