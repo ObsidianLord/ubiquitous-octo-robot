@@ -20,7 +20,7 @@ const TypeChoose = ({ id, go }) => (
 				header="Целевой сбор"
 				subheader="Когда есть определённая цель"
 				asideMode="expand"
-				onClick={(event) => { store.fundTypes = fundTypes.GOAL; go(event) }}
+				onClick={(event) => { store.fundType = fundTypes.GOAL; go(event) }}
 				data-to="details-edit-form"
 			/>
 			<Banner
@@ -28,7 +28,7 @@ const TypeChoose = ({ id, go }) => (
 				header="Регулярный сбор"
 				subheader="Если помощь нужна ежемесячно"
 				asideMode="expand"
-				onClick={(event) => { store.fundTypes = fundTypes.REGULAR; go(event) }}
+				onClick={(event) => { store.fundType = fundTypes.REGULAR; go(event) }}
 				data-to="details-edit-form"
 			/>
 		</Group>
