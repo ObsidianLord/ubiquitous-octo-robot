@@ -34,16 +34,23 @@ export default class AdditionalDetailsEditForm extends React.Component {
                 {value: 'f', title: 'Женский'}
             ],
 
+            fundEndsDefined: false,
             endsDate: undefined,
-
-            shouldDisplayDatePicked: false
+            displayDatePicker: false,
         }
-        this.state.defaultAuthor = this.state.availableAuthors[0].value
+
+        this.state = {
+            ...this.state,
+
+            author: this.state.availableAuthors[0].title,
+            defaultAuthor: this.state.availableAuthors[0].value
+        }
 
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.onFundEndsChosen = this.onFundEndsChosen.bind(this)
         this.onDateChosen = this.onDateChosen.bind(this)
         this.dateToFormat = this.dateToFormat.bind(this)
+        this.canSubmitForm = this.canSubmitForm.bind(this)
     }
 
     componentDidMount() {
@@ -54,14 +61,19 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.state.availableAuthors.forEach(author => {
             if (value === author.value) {
                 store.author = author.title
+                this.setState({
+                    ...this.state,
+                    author: author.title
+                })
             }
         });
     }
 
-    onFundEndsChosen(event, dateNotDefined) {
+    onFundEndsChosen(event, fundEndsAtExactDate) {
         this.setState({
             ...this.state,
-            shouldDisplayDatePicked: !dateNotDefined
+            fundEndsDefined: true,
+            displayDatePicker: fundEndsAtExactDate
         })
     }
 
@@ -72,6 +84,14 @@ export default class AdditionalDetailsEditForm extends React.Component {
 
     dateToFormat(date) {
         return date.getFullYear() + '-' + (date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+    }
+
+    canSubmitForm() {
+        const authorDefined = this.state.author !== undefined
+        const endsDateDefined = this.endsDate !== undefined
+        const mustPickDate = this.state.displayDatePicker
+
+        return authorDefined && this.state.fundEndsDefined && (!mustPickDate || endsDateDefined)
     }
 
     render() {
@@ -97,19 +117,17 @@ export default class AdditionalDetailsEditForm extends React.Component {
                                 (<option value={author.value}>{author.title}</option>)
                             )
                         }
-                        {/*<option value="m">Матвей Правосудов</option>
-                        <option value="f">Женский</option>*/}
                     </Select>
 
                     <FormLayoutGroup top="Сбор завершится">
-                        <Radio onChange={(event) => this.onFundEndsChosen(event, true)} name="type">Когда соберём
+                        <Radio onChange={(event) => this.onFundEndsChosen(event, false)} name="type">Когда соберём
                             сумму</Radio>
-                        <Radio onChange={(event) => this.onFundEndsChosen(event, false)} name="type">В определённую
+                        <Radio onChange={(event) => this.onFundEndsChosen(event, true)} name="type">В определённую
                             дату</Radio>
                     </FormLayoutGroup>
 
                     {
-                        this.state.shouldDisplayDatePicked &&
+                        this.state.displayDatePicker &&
                         <Input type="date"
                                top="Сбор завершится"
                                placeholder="Выберите дату"
@@ -124,7 +142,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
 
                 <FixedLayout vertical="bottom">
                     <Div>
-                        <Button size="xl" stretched>Далее</Button>
+                        <Button size="xl" stretched disabled={!this.canSubmitForm()}>Создать сбор</Button>
                     </Div>
                 </FixedLayout>
             </Panel>
