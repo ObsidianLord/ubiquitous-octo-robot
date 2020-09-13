@@ -9,14 +9,12 @@ import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
 import Icon24Back from "@vkontakte/icons/dist/24/back";
 import FormLayout from "@vkontakte/vkui/dist/components/FormLayout/FormLayout";
 import Input from "@vkontakte/vkui/dist/components/Input/Input";
-import Textarea from "@vkontakte/vkui/dist/components/Textarea/Textarea";
 import FixedLayout from "@vkontakte/vkui/dist/components/FixedLayout/FixedLayout";
 import Div from "@vkontakte/vkui/dist/components/Div/Div";
 import Button from "@vkontakte/vkui/dist/components/Button/Button";
 import FormLayoutGroup from "@vkontakte/vkui/dist/components/FormLayoutGroup/FormLayoutGroup";
 import Radio from "@vkontakte/vkui/dist/components/Radio/Radio";
 import Select from "@vkontakte/vkui/dist/components/Select/Select";
-import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
 import dateToFormat from "../utils";
 
 const osName = platform();
@@ -30,11 +28,6 @@ export default class AdditionalDetailsEditForm extends React.Component {
             go: props.go,
             store: store,
 
-            availableAuthors: [
-                {value: 'm', title: 'Матвей Правосудов'},
-                {value: 'f', title: 'Женский'}
-            ],
-
             fundEndsDefined: false,
             endsDate: undefined,
             displayDatePicker: false,
@@ -43,8 +36,8 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.state = {
             ...this.state,
 
-            author: this.state.availableAuthors[0].title,
-            defaultAuthor: this.state.availableAuthors[0].value
+            author: authors[0].title,
+            defaultAuthor: authors[0].value
         }
 
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
@@ -58,7 +51,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
 
     onAuthorChosen(event) {
         const {name, value} = event.currentTarget;
-        this.state.availableAuthors.forEach(author => {
+        authors.forEach(author => {
             if (value === author.value) {
                 store.author = author.title
                 this.setState({
