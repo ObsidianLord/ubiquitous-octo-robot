@@ -11,7 +11,7 @@ import Icon28TargetOutline from "@vkontakte/icons/dist/28/target_outline";
 import {store} from '../store'
 import {fundTypes} from '../store'
 
-const TypeChoose = ({ go }) => (
+const TypeChoose = ({ id, go }) => (
 	<Panel id={id} styles={{background: 'black'}} centered={true}>
 		<PanelHeader>Тип сбора</PanelHeader>
 		<Group title="Fund type choose buttons">

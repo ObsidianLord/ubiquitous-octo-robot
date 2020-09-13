@@ -7,6 +7,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Persik from './panels/Persik';
 import { store } from './store';
+import TypeChoose from "./panels/TypeChoose";
 
 export default class App extends React.Component {
     constructor(data) {
@@ -57,6 +58,7 @@ export default class App extends React.Component {
             <View activePanel={this.state.activePanel}>
                 <Home id='home' go={this.go} />
                 <Persik id='persik' go={this.go} />
+                <TypeChoose id='type-choose' go={this.go} />
             </View>
         )
     }
