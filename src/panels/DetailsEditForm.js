@@ -73,7 +73,7 @@ export default class DetailsEditForm extends React.Component {
                 </FormLayout>
                 <FixedLayout vertical="bottom">
                     <Div>
-                        <Button size="l" stretched>Далее</Button>
+                        <Button size="xl" stretched>Далее</Button>
                     </Div>
                 </FixedLayout>
             </Panel>
