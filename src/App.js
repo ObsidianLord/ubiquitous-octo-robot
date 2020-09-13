@@ -7,38 +7,56 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Persik from './panels/Persik';
 
-const App = () => {
-	const [activePanel, setActivePanel] = useState('home');
-	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+export default class App extends React.Component {
+    constructor(data) {
+        super(data)
 
-	useEffect(() => {
-		bridge.subscribe(({ detail: { type, data }}) => {
-			if (type === 'VKWebAppUpdateConfig') {
-				const schemeAttribute = document.createAttribute('scheme');
-				schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
-				document.body.attributes.setNamedItem(schemeAttribute);
-			}
-		});
-		async function fetchData() {
-			const user = await bridge.send('VKWebAppGetUserInfo');
-			setUser(user);
-			setPopout(null);
-		}
-		fetchData();
-	}, []);
+        this.state = {
+            activePanel: "home",
+        };
 
-	const go = e => {
-		setActivePanel(e.currentTarget.dataset.to);
-	};
+        // window.onpopstate = function(event) {
+        //     if (state.history.length > 0) {
+        //         const pair = state.history.pop();
+        //         setState({
+        //             activeStory: pair.story,
+        //             activePanel: pair.panel,
+        //             prev_story: obj.state.activeStory
+        //         });
+        //     } else {
+        //     }
+        // }
+        this.go = this.go.bind(this);
+    }
 
-	return (
-		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} />
-			<Persik id='persik' go={go} />
-		</View>
-	);
+    go(event){
+        this.setState({
+            activePanel: event.currentTarget.dataset.to
+        });
+    };
+
+    componentDidMount() {
+        bridge.subscribe(({ detail: { type, data }}) => {
+            if (type === 'VKWebAppUpdateConfig') {
+                const schemeAttribute = document.createAttribute('scheme');
+                schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
+                document.body.attributes.setNamedItem(schemeAttribute);
+            }
+        });
+        // async function fetchData() {
+        //     const user = await bridge.send('VKWebAppGetUserInfo');
+        //     setUser(user);
+        //     setPopout(null);
+        // }
+        // fetchData();
+    }
+
+    render() {
+        return (
+            <View activePanel={this.state.activePanel}>
+                <Home id='home' go={this.go} />
+                <Persik id='persik' go={this.go} />
+            </View>
+        )
+    }
 }
-
-export default App;
-
