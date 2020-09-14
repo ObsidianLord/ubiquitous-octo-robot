@@ -40,7 +40,7 @@ import Icon20ViewOutline from '@vkontakte/icons/dist/20/view_outline';
 
 
 import '@vkontakte/vkui/dist/vkui.css';
-import { store } from '../store.js';
+import { store, fundTypes } from '../store.js';
 
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -74,7 +74,7 @@ export default class Feed extends React.Component {
                             <Text style={{marginBottom: 12}}>
                                 {store.description}
                             </Text>
-                            <Snippet go={this.state.go} progressValue={80} progressText="Собрано 8 750 ₽ из 10 000 ₽"/>
+                            <Snippet go={this.state.go} progressValue={80} progressText={store.fundType === fundTypes.GOAL  ? 'Собрано 8 750 ₽ из 10 000 ₽' : 'Собрано в сентябре 8 750 ₽'}/>
                         </Div>
                         <Div style={{paddingTop: 0}}>
                             <div style={{  display: "flex", textAlign: "center", alignItems: "center"}}>

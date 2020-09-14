@@ -4,6 +4,7 @@ export const store = {
     goal: null,
     endsDate: null,
     description: null,
+    fundType: null,
     paymentAccount: null,
     author: 'Матвей Правосудов',
     authorValue: 'm',
