@@ -22,6 +22,7 @@ import {store, authors} from "../store";
 import {rippleEffect} from "../utils";
 import './Persik.css'
 import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
+import Icon24DismissOverlay from '@vkontakte/icons/dist/24/dismiss_overlay';
 import Icon56GalleryOutline from "@vkontakte/icons/dist/56/gallery_outline";
 import File from "@vkontakte/vkui/dist/components/File/File";
 
@@ -125,6 +126,13 @@ export default class DetailsEditForm extends React.Component {
         this.setState({author: author})
     }
 
+    resetImage() {
+        this.setState({
+            imageLoaded: false,
+            imageSource: undefined
+        });
+    }
+
     canSubmitForm() {
         const nameDefined = this.state.name !== undefined && this.state.name !== ""
         const priceDefined = this.state.price !== undefined && this.state.price !== ""
@@ -149,8 +157,13 @@ export default class DetailsEditForm extends React.Component {
                 <div id={'file'}>
                     {this.state.imageLoaded ?
                         (
-                            <img id={'image'} src={this.state.imageSource} alt={'loaded image'}
-                                 style={{maxWidth: '100%', height: 'auto'}}/>
+                            <div style={{margin: '0 12px', position: 'relative', borderRadius: '10px'}}>
+                                <img id={'image'} src={this.state.imageSource} alt={'loaded image'}
+                                 style={{display: 'block', height: '170px', objectFit: 'cover', width: '100%', margin: '11px 0'}}/>
+                                <div style={{position: 'absolute', right: 8, top: 8}}>
+                                    <Icon24DismissOverlay onClick={()=>{this.resetImage()}}></Icon24DismissOverlay>
+                                </div>
+                            </div>
                         ) :
                         (
                             <File controlSize={'xl'}

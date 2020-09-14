@@ -20,7 +20,7 @@
 
 .fund-details__progress-outer .Text {
   color: var(--button_primary_foreground);
-  padding-top: 1px;
+  padding-top: 2px;
   padding-right: 8px;
   display: inline-block;
 }
