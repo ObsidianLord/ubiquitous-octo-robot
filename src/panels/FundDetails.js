@@ -103,7 +103,7 @@ class FundDetails extends React.Component {
       if (div && text) {
         const divWidth = div.clientWidth;
         const textWidth = text.clientWidth;
-        if (textWidth + 65 <= divWidth) {
+        if (textWidth + 70 <= divWidth) {
           this.setState({
             isInnerDivTooShort: false
           });
@@ -148,15 +148,18 @@ class FundDetails extends React.Component {
           <Div>
             <Title level="1" weight="bold" style={{ marginBottom: 4 }}>{store.name}</Title>
             <Headline weight="medium" style={{ marginBottom: 4 }}>{`Автор ${store.author}`}</Headline>
-            <Text weight="regular">
-              Сбор закончится через {moment(store.endsDate).diff(moment(), 'days')} дней
-            </Text>
+            { store.endsDate &&
+              <Text weight="regular">
+                Сбор закончится через {moment(store.endsDate).diff(moment(), 'days')} дней
+              </Text>
+            }
           </Div>
         </Group>
         <Group separator="show">
           <Div>
-            <Text weight="regular" style={{ marginBottom: 6 }}>Нужно собрать до {`${moment(store.endsDate).format('D MMMM').toLowerCase()}`}</Text>
-            
+            { store.endsDate &&
+              <Text weight="regular" style={{ marginBottom: 6 }}>Нужно собрать до {`${moment(store.endsDate).format('D MMMM').toLowerCase()}`}</Text>
+            }
             <div id='progress-outer-div' className='fund-details__progress-outer'>
               <Text
                 id='current-text-outer'
