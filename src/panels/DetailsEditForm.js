@@ -18,7 +18,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
-import {store, authors} from "../store";
+import {store, authors, paymentAccounts} from "../store";
 import {rippleEffect} from "../utils";
 import './Persik.css'
 import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
@@ -46,7 +46,9 @@ export default class DetailsEditForm extends React.Component {
             goal: undefined,
             description: undefined,
             paymentAccount: undefined,
-            author: undefined
+
+            author: undefined,
+            authorValue: undefined
         };
 
         this.onImageUpload = this.onImageUpload.bind(this)
@@ -55,7 +57,7 @@ export default class DetailsEditForm extends React.Component {
         this.onGoalChange = this.onGoalChange.bind(this)
         this.onDescriptionChange = this.onDescriptionChange.bind(this)
         this.onPaymentAccountChange = this.onPaymentAccountChange.bind(this)
-        this.onAuthorChange = this.onAuthorChange.bind(this)
+        this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.canSubmitForm = this.canSubmitForm.bind(this)
     }
 
@@ -115,15 +117,23 @@ export default class DetailsEditForm extends React.Component {
     }
 
     onPaymentAccountChange(event) {
-        let paymentAccount = event.target.value
-        store.paymentAccount = paymentAccount
-        this.setState({paymentAccount: paymentAccount})
+        let paymentAccountValue = event.target.value
+        paymentAccounts.forEach(paymentAccount => {
+            if (paymentAccountValue === paymentAccount.value) {
+                store.paymentAccount = paymentAccount.title
+                this.setState({author: paymentAccount.title, authorValue: paymentAccount.value})
+            }
+        });
     }
 
-    onAuthorChange(event) {
-        const author = event.target.value
-        store.author = author
-        this.setState({author: author})
+    onAuthorChosen(event) {
+        const authorValue = event.target.value
+        authors.forEach(author => {
+            if (authorValue === author.value) {
+                store.author = author.title
+                this.setState({author: author.title, authorValue: author.value})
+            }
+        });
     }
 
     resetImage() {
@@ -216,15 +226,18 @@ export default class DetailsEditForm extends React.Component {
                         value={this.state.paymentAccount}
                         onChange={this.onPaymentAccountChange}
                     >
-                        <option value="m">Мужской</option>
-                        <option value="f">Женский</option>
+                        {
+                            paymentAccounts.map(option =>
+                                (<option value={option.value}>{option.title}</option>)
+                            )
+                        }
                     </Select>
 
                     {this.state.id === REGULAR_FORM_ID &&
                     <Select
                         top="Автор"
                         value={this.state.author}
-                        onChange={this.onAuthorChange}
+                        onChange={this.onAuthorChosen}
                     >
                         {
                             authors.map(author =>

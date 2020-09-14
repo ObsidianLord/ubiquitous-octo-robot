@@ -36,7 +36,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
             ...this.state,
 
             author: authors[0].title,
-            defaultAuthor: authors[0].value
+            authorValue: authors[0].value
         }
 
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
@@ -49,11 +49,11 @@ export default class AdditionalDetailsEditForm extends React.Component {
     }
 
     onAuthorChosen(event) {
-        const {name, value} = event.currentTarget;
+        const authorValue = event.currentTarget.value;
         authors.forEach(author => {
-            if (value === author.value) {
+            if (authorValue === author.value) {
                 store.author = author.title
-                this.setState({author: author.title})
+                this.setState({author: author.title, authorValue: author.value})
             }
         });
     }
@@ -91,10 +91,8 @@ export default class AdditionalDetailsEditForm extends React.Component {
                 <FormLayout style={{paddingBottom: 60}}>
 
                     <Select top="Автор"
-                            defaultValue={this.state.defaultAuthor}
+                            value={this.state.authorValue}
                             onChange={this.onAuthorChosen}
-                            value={this.state.author}
-                            name={"author"}
                     >
                         {
                             authors.map(author =>
