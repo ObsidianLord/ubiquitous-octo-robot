@@ -73,7 +73,7 @@ export default class Feed extends React.Component {
                             <Text>
                                 Сейчас самое время помочь тем, кто не может попросить о помощи сам.
                             </Text>
-                            <Snippet progressValue={80} progressText="Собрано 8 750 ₽ из 10 000 ₽"/>
+                            <Snippet go={this.state.go} progressValue={80} progressText="Собрано 8 750 ₽ из 10 000 ₽"/>
                         </Div>
                         <Div style={{paddingTop: 0}}>
                             <div style={{  display: "flex", textAlign: "center", alignItems: "center"}}>

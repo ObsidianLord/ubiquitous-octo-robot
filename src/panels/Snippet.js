@@ -18,8 +18,8 @@ export default class Snippet extends React.Component {
             progressValue: data.progressValue ? data.progressValue : 0,
             fundName: data.fundName ? data.fundName : "Добряши помогают котикам",
             author: data.author ? data.author : "Матвей Правосудов",
-            buttonDisabled: data.onClick ? false : true,
-            onClick: data.onClick,
+            buttonDisabled: data.go ? false : true,
+            go: data.go,
         };
     }
 
@@ -39,7 +39,7 @@ export default class Snippet extends React.Component {
                 <Separator />
                 <SimpleCell        
                   disabled
-                  after={<Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="outline" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>}
+                  after={<Button disabled={this.state.buttonDisabled} onClick={this.state.go} data-to="fund-details" mode="outline" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>}
                   description={<Progress value={this.state.progressValue} />}
                   >
                     <Subhead weight="regular">
