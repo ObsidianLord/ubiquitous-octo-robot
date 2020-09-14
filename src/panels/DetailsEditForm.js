@@ -17,7 +17,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
-import {store, authors, paymentAccounts} from "../store";
+import {authors, paymentAccounts, store} from "../store";
 import {rippleEffect} from "../utils";
 import './Persik.css'
 import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
@@ -29,6 +29,8 @@ const REGULAR_FORM_ID = "details-edit-form-regular"
 const GOAL_FORM_ID = "details-edit-form-goal"
 
 const osName = platform();
+
+const NUMBER_FORMAT = new Intl.NumberFormat('ru-RU')
 
 export default class DetailsEditForm extends React.Component {
     constructor(data) {
@@ -42,7 +44,7 @@ export default class DetailsEditForm extends React.Component {
             imageSource: store.imageSource,
 
             name: store.name,
-            price: store.price,
+            price: (store.price == null) ? null : NUMBER_FORMAT.format(store.price) + ' ₽',
             goal: store.goal,
             description: store.description,
             paymentAccount: store.paymentAccount,
@@ -88,12 +90,36 @@ export default class DetailsEditForm extends React.Component {
 
     onPriceChange(event) {
         let price = event.target.value
-        if (price === "") {
-            price = undefined
+        if (!price || price === "") {
+            store.price = null
+            this.setState({price: null})
+            return
         }
 
-        store.price = price
-        this.setState({price: price})
+        const actualPrice = NUMBER_FORMAT.format(store.price) + ' ₽'
+        if (price.length + 1 === actualPrice.length) { // one character deleted
+            price = store.price.toString()
+            price = price.substring(0, price.length - 1)
+            if(price.length === 0) {
+                store.price = null
+                this.setState({price: ''})
+                return
+            }
+        }
+
+        const purePrice = price
+            .replaceAll(/\s+₽/g, '')
+            .replaceAll(/\s+/g, '')
+
+        const containsInvalidCharacters = !purePrice.match(/^\d+$/g)
+        if (containsInvalidCharacters) {
+            price = NUMBER_FORMAT.format(store.price) + ' ₽'
+            this.setState({price: price})
+        } else {
+            price = NUMBER_FORMAT.format(purePrice) + ' ₽'
+            store.price = parseInt(purePrice)
+            this.setState({price: price})
+        }
     }
 
     onGoalChange(event) {
@@ -171,9 +197,18 @@ export default class DetailsEditForm extends React.Component {
                         (
                             <div style={{margin: '0 12px', position: 'relative'}}>
                                 <img id={'image'} src={this.state.imageSource} alt={'loaded image'}
-                                 style={{display: 'block', height: '170px', objectFit: 'cover', width: '100%', margin: '11px 0', borderRadius: '10px'}}/>
+                                     style={{
+                                         display: 'block',
+                                         height: '170px',
+                                         objectFit: 'cover',
+                                         width: '100%',
+                                         margin: '11px 0',
+                                         borderRadius: '10px'
+                                     }}/>
                                 <div style={{position: 'absolute', right: 8, top: 8}}>
-                                    <Icon24DismissOverlay onClick={()=>{this.resetImage()}}></Icon24DismissOverlay>
+                                    <Icon24DismissOverlay onClick={() => {
+                                        this.resetImage()
+                                    }}></Icon24DismissOverlay>
                                 </div>
                             </div>
                         ) :
@@ -205,8 +240,8 @@ export default class DetailsEditForm extends React.Component {
                         onChange={this.onFundNameChange}
                     />
                     <Input
-                        type="number"
-                        top="Сумма"
+                        type="tel"
+                        top="Сумма, ₽"
                         placeholder="Сколько нужно собрать"
                         value={this.state.price}
                         onChange={this.onPriceChange}
