@@ -16,6 +16,7 @@ import Icon28CancelOutline from '@vkontakte/icons/dist/28/cancel_outline';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Snippet from './Snippet';
+import { store } from '../store';
 
 const osName = platform();
 
@@ -29,6 +30,15 @@ export default class PrePost extends React.Component {
 
             description: ""
         };
+
+        this.onDescriptionChange = this.onDescriptionChange.bind(this)
+    }
+
+    onDescriptionChange(event) {
+        store.description = event.target.value;
+        this.setState({
+            description: event.target.value
+        });
     }
 
     render() {
@@ -44,7 +54,7 @@ export default class PrePost extends React.Component {
                 <FormLayout style={{paddingBottom: 60}}>
                   <Textarea
                     placeholder="Что у вас нового?"
-                    onChange={(e) => this.setState({description: e.target.value})}
+                    onChange={this.onDescriptionChange}
                   />
                   <Div>
                     <Snippet/>

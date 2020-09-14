@@ -40,6 +40,7 @@ import Icon20ViewOutline from '@vkontakte/icons/dist/20/view_outline';
 
 
 import '@vkontakte/vkui/dist/vkui.css';
+import { store } from '../store.js';
 
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -71,7 +72,7 @@ export default class Feed extends React.Component {
                         </SimpleCell>
                         <Div>
                             <Text>
-                                Сейчас самое время помочь тем, кто не может попросить о помощи сам.
+                                {store.description}
                             </Text>
                             <Snippet go={this.state.go} progressValue={80} progressText="Собрано 8 750 ₽ из 10 000 ₽"/>
                         </Div>

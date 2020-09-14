@@ -4,7 +4,8 @@ export const store = {
     goal: null,
     description: null,
     paymentAccount: null,
-    author: null,
+    author: 'Матвей Правосудов',
+    authorValue: 'm',
     imageSource: null
 };
 

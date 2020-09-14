@@ -38,17 +38,17 @@ export default class DetailsEditForm extends React.Component {
             id: data.id,
             go: data.go,
 
-            imageLoaded: false,
-            imageSource: null,
+            imageLoaded: store.imageSource ? true : false,
+            imageSource: store.imageSource,
 
-            name: null,
-            price: null,
-            goal: null,
-            description: null,
-            paymentAccount: null,
+            name: store.name,
+            price: store.price,
+            goal: store.goal,
+            description: store.description,
+            paymentAccount: store.paymentAccount,
 
-            author: null,
-            authorValue: null
+            author: store.author,
+            authorValue: store.authorValue
         };
 
         this.onImageUpload = this.onImageUpload.bind(this)
@@ -131,6 +131,7 @@ export default class DetailsEditForm extends React.Component {
         authors.forEach(author => {
             if (authorValue === author.value) {
                 store.author = author.title
+                store.authorValue = author.value
                 this.setState({author: author.title, authorValue: author.value})
             }
         });
