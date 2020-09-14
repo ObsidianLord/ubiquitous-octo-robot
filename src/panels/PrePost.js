@@ -52,7 +52,7 @@ export default class PrePost extends React.Component {
                 </FormLayout>
                 <FixedLayout vertical="bottom" filled>
                     <Div>
-                        <Button size="xl" stretched>Опубликовать</Button>
+                        <Button size="xl" stretched onClick={this.state.go} data-to="feed">Опубликовать</Button>
                     </Div>
                 </FixedLayout>
             </Panel>

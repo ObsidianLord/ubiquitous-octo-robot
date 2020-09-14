@@ -1,0 +1,45 @@
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fund-details__progress-outer {
+  position: relative;
+  height: 24px;
+  background: var(--icon_tertiary);
+  text-align: right;
+  border-radius: 6px;
+}
+
+.fund-details__progress-outer .Text {
+  color: var(--button_primary_foreground);
+  padding-top: 1px;
+  padding-right: 8px;
+  display: inline-block;
+}
+
+.fund-details__progress-outer .text-raised {
+  color: var(--text_primary);
+  transform: translateY(-28px);
+}
+
+.fund-details__progress-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 24px;
+  background: var(--dynamic_green);
+  border-radius: 6px;
+  color: var(--button_primary_foreground);
+}
+
+
+
