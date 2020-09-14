@@ -10,7 +10,6 @@ import FixedLayout from '@vkontakte/vkui/dist/components/FixedLayout/FixedLayout
 import FormLayout from '@vkontakte/vkui/dist/components/FormLayout/FormLayout';
 import Input from '@vkontakte/vkui/dist/components/Input/Input';
 import Select from '@vkontakte/vkui/dist/components/Select/Select';
-import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
 
 import '@vkontakte/vkui/dist/vkui.css';
@@ -27,6 +26,7 @@ import Icon56GalleryOutline from "@vkontakte/icons/dist/56/gallery_outline";
 import File from "@vkontakte/vkui/dist/components/File/File";
 
 const REGULAR_FORM_ID = "details-edit-form-regular"
+const GOAL_FORM_ID = "details-edit-form-goal"
 
 const osName = platform();
 
@@ -250,7 +250,8 @@ export default class DetailsEditForm extends React.Component {
                 <FixedLayout vertical="bottom" filled>
                     <Div>
                         <Button size="xl" stretched disabled={!this.canSubmitForm()}
-                                onClick={this.state.go} data-to="additional-details-edit-form">
+                                onClick={this.state.go}
+                                data-to={this.state.id === GOAL_FORM_ID ? 'additional-details-edit-form' : 'pre-post'}>
                             Далее
                         </Button>
                     </Div>
