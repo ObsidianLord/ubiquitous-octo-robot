@@ -7,7 +7,7 @@ import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
 import Separator from '@vkontakte/vkui/dist/components/Separator/Separator';
 import Progress from '@vkontakte/vkui/dist/components/Progress/Progress';
 
-import { store } from '../store';
+import { getStore } from '../store';
 export default class Snippet extends React.Component {
     constructor(data) {
         super(data)
@@ -26,15 +26,15 @@ export default class Snippet extends React.Component {
     render() {
         return (
             <Card size="l">
-                { store.imageSource &&
-                <img src={store.imageSource}
+                { getStore().imageSource &&
+                <img src={getStore().imageSource}
                     height={140} width="100%" style={{objectFit: "cover", borderTopLeftRadius: 10, borderTopRightRadius: 10}} alt="Girl in a jacket"/>}
                 <SimpleCell
                   disabled
-                  description={store.author + " · Закончится через 5 дней"}
+                  description={getStore().author + " · Закончится через 5 дней"}
                   >
                     <Text weight="semibold">
-                        {store.name}
+                        {getStore().name}
                     </Text>
                 </SimpleCell>
                 <Separator />

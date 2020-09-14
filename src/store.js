@@ -1,4 +1,4 @@
-export const store = {
+var store = {
     name: null,
     price: null,
     goal: null,
@@ -6,10 +6,18 @@ export const store = {
     description: null,
     fundType: null,
     paymentAccount: null,
-    author: 'Матвей Правосудов',
-    authorValue: 'm',
+    author: null,
     imageSource: null
 };
+
+export function getStore() {
+    return store;
+}
+
+export function setStore(storePart) {
+    store = { ...store, ...storePart }
+    return store
+}
 
 export const fundTypes = {
     GOAL: 'GOAL',

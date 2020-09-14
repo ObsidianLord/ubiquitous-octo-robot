@@ -51,7 +51,7 @@ import './FundDetails.css'
 
 import cat from '../img/cat.png';
 import { Input } from '@vkontakte/vkui';
-import { store } from '../store';
+import { getStore } from '../store';
 
 const TICK_INTERVAL = 10;
 
@@ -64,7 +64,7 @@ class FundDetails extends React.Component {
       interval: null,
       isInnerDivTooShort: true,
       isOuterDivTooShort: false,
-      price: store.price
+      price: getStore().price
     };
   }
 
@@ -142,23 +142,33 @@ class FundDetails extends React.Component {
 
   render() {
     return (
-      <Panel id={this.props.id}>
-        <img src={cat} height="140" style={{display: 'block', width: '100%', objectFit: 'cover'}}></img>
+        <Panel id={this.props.id}>
+            {getStore().imageSource ?
+                (
+                    <img src={getStore().imageSource}
+                         height={140}
+                         style={{display: 'block', width: '100%', objectFit: 'cover'}}
+                         alt="Girl in a jacket"/>
+                ) :
+                (
+                    <img src={cat} height="140" style={{display: 'block', width: '100%', objectFit: 'cover'}}></img>
+                )
+            }
         <Group separator="show">
           <Div>
-            <Title level="1" weight="bold" style={{ marginBottom: 4 }}>{store.name}</Title>
-            <Headline weight="medium" style={{ marginBottom: 4 }}>{`Автор ${store.author}`}</Headline>
-            { store.endsDate &&
+            <Title level="1" weight="bold" style={{ marginBottom: 4 }}>{getStore().name}</Title>
+            <Headline weight="medium" style={{ marginBottom: 4 }}>{`Автор ${getStore().author}`}</Headline>
+            { getStore().endsDate &&
               <Text weight="regular">
-                Сбор закончится через {moment(store.endsDate).diff(moment(), 'days')} дней
+                Сбор закончится через {moment(getStore().endsDate).diff(moment(), 'days')} дней
               </Text>
             }
           </Div>
         </Group>
         <Group separator="show">
           <Div>
-            { store.endsDate &&
-              <Text weight="regular" style={{ marginBottom: 6 }}>Нужно собрать до {`${moment(store.endsDate).format('D MMMM').toLowerCase()}`}</Text>
+            { getStore().endsDate &&
+              <Text weight="regular" style={{ marginBottom: 6 }}>Нужно собрать до {`${moment(getStore().endsDate).format('D MMMM').toLowerCase()}`}</Text>
             }
             <div id='progress-outer-div' className='fund-details__progress-outer'>
               <Text
@@ -187,7 +197,7 @@ class FundDetails extends React.Component {
         <Group separator="show">
           <Div>
             <Text weight="regular">
-              {store.description}
+              {getStore().description}
             </Text>
           </Div>
         </Group>

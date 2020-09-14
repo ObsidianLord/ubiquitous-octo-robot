@@ -21,7 +21,7 @@ import Icon28CancelOutline from '@vkontakte/icons/dist/28/cancel_outline';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Snippet from './Snippet';
-import { store } from '../store';
+import { getStore, setStore } from '../store';
 
 const osName = platform();
 
@@ -40,7 +40,7 @@ export default class PrePost extends React.Component {
     }
 
     onDescriptionChange(event) {
-        store.description = event.target.value;
+        setStore({description: event.target.value})
         this.setState({
             description: event.target.value
         });
@@ -54,7 +54,7 @@ export default class PrePost extends React.Component {
                             {osName === IOS ? <Icon28CancelCircleOutline/> : <Icon28CancelOutline/>}
                         </PanelHeaderButton>}
                 >
-                    {store.author}
+                    {getStore().author}
                 </PanelHeader>
                 <FormLayout style={{paddingBottom: 60}}>
                   <Textarea

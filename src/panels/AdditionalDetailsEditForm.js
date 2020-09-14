@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {authors, store} from '../store'
+import {authors, getStore, setStore} from '../store'
 import Panel from "@vkontakte/vkui/dist/components/Panel/Panel";
 import PanelHeader from "@vkontakte/vkui/dist/components/PanelHeader/PanelHeader";
 import PanelHeaderButton from "@vkontakte/vkui/dist/components/PanelHeaderButton/PanelHeaderButton";
@@ -29,15 +29,12 @@ export default class AdditionalDetailsEditForm extends React.Component {
 
             fundEndsDefined: false,
             endsDate: null,
-            displayDatePicker: false,
-        }
+            author: getStore().author ? getStore().author : authors[0].title,
+            authorValue: getStore().author ? authors.filter(ath => ath.title == getStore().author).value : authors[0].value,
 
-        this.state = {
-            ...this.state,
-
-            author: authors[0].title,
-            authorValue: authors[0].value
+            displayDatePicker: false
         }
+        setStore({author: this.state.author})
 
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.onFundEndsChosen = this.onFundEndsChosen.bind(this)
@@ -52,7 +49,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
         const authorValue = event.currentTarget.value;
         authors.forEach(author => {
             if (authorValue === author.value) {
-                store.author = author.title
+                setStore({author: author.title})
                 this.setState({author: author.title, authorValue: author.value})
             }
         });
@@ -69,7 +66,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.setState({
             endsDate: event.currentTarget.value
         })
-        store.endsDate = event.currentTarget.value
+        setStore({endsDate: event.currentTarget.value})
     }
 
     canSubmitForm() {

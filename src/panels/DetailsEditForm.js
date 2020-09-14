@@ -17,7 +17,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
-import {authors, paymentAccounts, store} from "../store";
+import {authors, getStore, paymentAccounts, setStore} from "../store";
 import {rippleEffect} from "../utils";
 import './Persik.css'
 import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
@@ -40,18 +40,19 @@ export default class DetailsEditForm extends React.Component {
             id: data.id,
             go: data.go,
 
-            imageLoaded: store.imageSource ? true : false,
-            imageSource: store.imageSource,
+            imageLoaded: !!getStore().imageSource,
+            imageSource: getStore().imageSource,
 
-            name: store.name,
-            price: (store.price == null) ? null : NUMBER_FORMAT.format(store.price) + ' ₽',
-            goal: store.goal,
-            description: store.description,
-            paymentAccount: store.paymentAccount,
+            name: getStore().name,
+            price: (getStore().price == null) ? null : NUMBER_FORMAT.format(getStore().price) + ' ₽',
+            goal: getStore().goal,
+            description: getStore().description,
+            paymentAccount: getStore().paymentAccount,
 
-            author: store.author,
-            authorValue: store.authorValue
+            author: getStore().author ? getStore().author : authors[0].title,
+            authorValue: getStore().author ? authors.filter(author => author.title === getStore().author).value : authors[0].value
         };
+        setStore({author: this.state.author})
 
         this.onImageUpload = this.onImageUpload.bind(this)
         this.onFundNameChange = this.onFundNameChange.bind(this)
@@ -76,7 +77,7 @@ export default class DetailsEditForm extends React.Component {
                     imageLoaded: true,
                     imageSource: imageUrl
                 })
-                store.imageSource = imageUrl
+                setStore({imageSource: imageUrl})
             };
             reader.readAsDataURL(files[0])
         }
@@ -84,24 +85,24 @@ export default class DetailsEditForm extends React.Component {
 
     onFundNameChange(event) {
         const name = event.target.value
-        store.name = name
+        setStore({name: name})
         this.setState({name: name})
     }
 
     onPriceChange(event) {
         let price = event.target.value
         if (!price || price === "") {
-            store.price = null
+            setStore({price: null})
             this.setState({price: null})
             return
         }
 
-        const actualPrice = NUMBER_FORMAT.format(store.price) + ' ₽'
-        if (price.length + 1 === actualPrice.length && store.price != null) { // one character deleted
-            price = store.price.toString()
+        const actualPrice = NUMBER_FORMAT.format(getStore().price) + ' ₽'
+        if (price.length + 1 === actualPrice.length && getStore().price != null) { // one character deleted
+            price = getStore().price.toString()
             price = price.substring(0, price.length - 1)
-            if(price.length === 0) {
-                store.price = null
+            if (price.length === 0) {
+                setStore({price: null})
                 this.setState({price: ''})
                 return
             }
@@ -113,11 +114,11 @@ export default class DetailsEditForm extends React.Component {
 
         const containsInvalidCharacters = !purePrice.match(/^\d+$/g)
         if (containsInvalidCharacters) {
-            price = NUMBER_FORMAT.format(store.price) + ' ₽'
+            price = NUMBER_FORMAT.format(getStore().price) + ' ₽'
             this.setState({price: price})
         } else {
             price = NUMBER_FORMAT.format(purePrice) + ' ₽'
-            store.price = parseInt(purePrice)
+            setStore({price: parseInt(purePrice)})
             this.setState({price: price})
         }
     }
@@ -128,7 +129,7 @@ export default class DetailsEditForm extends React.Component {
             goal = undefined
         }
 
-        store.goal = goal
+        setStore({goal: goal})
         this.setState({goal: goal})
     }
 
@@ -138,7 +139,7 @@ export default class DetailsEditForm extends React.Component {
             description = undefined
         }
 
-        store.description = description
+        setStore({description: description})
         this.setState({description: description})
     }
 
@@ -146,7 +147,7 @@ export default class DetailsEditForm extends React.Component {
         let paymentAccountValue = event.target.value
         paymentAccounts.forEach(paymentAccount => {
             if (paymentAccountValue === paymentAccount.value) {
-                store.paymentAccount = paymentAccount.title
+                setStore({paymentAccount: paymentAccount.title})
                 this.setState({author: paymentAccount.title, authorValue: paymentAccount.value})
             }
         });
@@ -156,15 +157,14 @@ export default class DetailsEditForm extends React.Component {
         const authorValue = event.target.value
         authors.forEach(author => {
             if (authorValue === author.value) {
-                store.author = author.title
-                store.authorValue = author.value
+                setStore({author: author.title})
                 this.setState({author: author.title, authorValue: author.value})
             }
         });
     }
 
     resetImage() {
-        store.imageSource = null;
+        getStore().imageSource = null;
         this.setState({
             imageLoaded: false,
             imageSource: null
@@ -208,7 +208,7 @@ export default class DetailsEditForm extends React.Component {
                                 <div style={{position: 'absolute', right: 8, top: 8}}>
                                     <Icon24DismissOverlay onClick={() => {
                                         this.resetImage()
-                                    }}></Icon24DismissOverlay>
+                                    }}/>
                                 </div>
                             </div>
                         ) :
@@ -273,7 +273,7 @@ export default class DetailsEditForm extends React.Component {
                     {this.state.id === REGULAR_FORM_ID &&
                     <Select
                         top="Автор"
-                        value={this.state.author}
+                        value={this.state.authorValue}
                         onChange={this.onAuthorChosen}
                     >
                         {

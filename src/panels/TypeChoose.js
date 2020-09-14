@@ -12,7 +12,7 @@ import Icon28TargetOutline from "@vkontakte/icons/dist/28/target_outline";
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
-import {store} from '../store'
+import {setStore} from '../store'
 import {fundTypes} from '../store'
 
 const osName = platform();
@@ -32,7 +32,7 @@ const TypeChoose = ({ id, go }) => (
                 header="Целевой сбор"
                 subheader="Когда есть определённая цель"
                 asideMode="expand"
-                onClick={(event) => { store.fundType = fundTypes.GOAL; go(event) }}
+                onClick={(event) => { setStore({fundType: fundTypes.GOAL}); go(event) }}
                 data-to="details-edit-form-goal"
             />
             <Banner
@@ -40,7 +40,7 @@ const TypeChoose = ({ id, go }) => (
                 header="Регулярный сбор"
                 subheader="Если помощь нужна ежемесячно"
                 asideMode="expand"
-                onClick={(event) => { store.fundType = fundTypes.REGULAR; go(event) }}
+                onClick={(event) => { setStore({fundType: fundTypes.REGULAR}); go(event) }}
                 data-to="details-edit-form-regular"
             />
         </Group>
