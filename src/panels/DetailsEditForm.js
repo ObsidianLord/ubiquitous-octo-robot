@@ -225,8 +225,8 @@ export default class DetailsEditForm extends React.Component {
                                         border: '2px #3F8AE0', borderStyle: 'dashed', borderRadius: '10px'
                                     }}
                                 >
-                                    <Icon56GalleryOutline fill={'royalblue'} height={22} width={22}/>
-                                    <Title style={{color: 'royalblue'}}>Загрузить обложку</Title>
+                                    <Icon56GalleryOutline fill={'var(--accent)'} height={22} width={22} style={{marginRight: 11}}/>
+                                    <Title style={{color: 'var(--accent)', marginBottom: 2}}>Загрузить обложку</Title>
                                 </Div>
                             </File>
                         )
@@ -265,7 +265,7 @@ export default class DetailsEditForm extends React.Component {
                     >
                         {
                             paymentAccounts.map(option =>
-                                (<option value={option.value}>{option.title}</option>)
+                                (<option key={option.value} value={option.value}>{option.title}</option>)
                             )
                         }
                     </Select>

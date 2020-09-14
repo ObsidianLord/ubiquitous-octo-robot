@@ -1,0 +1,7 @@
+.text-placeholder {
+  color: var(--content_placeholder_text);
+}
+
+.text-center {
+  text-align: center;
+}

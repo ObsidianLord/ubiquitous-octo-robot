@@ -41,7 +41,7 @@
   color: var(--button_primary_foreground);
 }
 
-.Progress__in {
+#fund-details .Progress__in {
   background: var(--dynamic_green);
 }
 

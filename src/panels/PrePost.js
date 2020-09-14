@@ -58,6 +58,9 @@ export default class PrePost extends React.Component {
                 </PanelHeader>
                 <FormLayout style={{paddingBottom: 60}}>
                   <Textarea
+                    grow
+                    style={{caretColor: 'var(--accent)'}}
+                    rows="2"
                     placeholder="Что у вас нового?"
                     onChange={this.onDescriptionChange}
                   />
