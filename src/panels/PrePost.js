@@ -54,7 +54,7 @@ export default class PrePost extends React.Component {
                             {osName === IOS ? <Icon28CancelCircleOutline/> : <Icon28CancelOutline/>}
                         </PanelHeaderButton>}
                 >
-                    Матвей
+                    {store.author}
                 </PanelHeader>
                 <FormLayout style={{paddingBottom: 60}}>
                   <Textarea
