@@ -60,6 +60,8 @@ export default class App extends React.Component {
                 const schemeAttribute = document.createAttribute('scheme');
                 schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
                 document.body.attributes.setNamedItem(schemeAttribute);
+                const status_bar = schemeAttribute.value.includes("light") ? "dark" : "light"
+                bridge.send("VKWebAppSetViewSettings", {"status_bar_style": status_bar});
             }
         });
         // async function fetchData() {
