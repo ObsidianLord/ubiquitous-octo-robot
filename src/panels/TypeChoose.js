@@ -28,7 +28,7 @@ const TypeChoose = ({ id, go }) => (
         </PanelHeader>
         <Group title="Fund type choose buttons">
             <Banner
-                before={<Icon28TargetOutline fill={"royalblue"}/>}
+                before={<Icon28TargetOutline fill={"var(--accent)"}/>}
                 header="Целевой сбор"
                 subheader="Когда есть определённая цель"
                 asideMode="expand"
@@ -36,7 +36,7 @@ const TypeChoose = ({ id, go }) => (
                 data-to="details-edit-form-goal"
             />
             <Banner
-                before={<Icon28CalendarOutline fill={"royalblue"}/>}
+                before={<Icon28CalendarOutline fill={"var(--accent)"}/>}
                 header="Регулярный сбор"
                 subheader="Если помощь нужна ежемесячно"
                 asideMode="expand"
