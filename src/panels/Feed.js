@@ -102,6 +102,7 @@ export default class Feed extends React.Component {
                           <Icon28CameraOutline/>
                         </PanelHeaderButton>}
                   right={<PanelHeaderButton><Icon28Notifications/></PanelHeaderButton>}
+                  separator={false}
                 >
                 <Tabs>
                     <TabsItem selected
