@@ -10,13 +10,17 @@ import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
 import Headline from '@vkontakte/vkui/dist/components/Typography/Headline/Headline';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
+import Caption from '@vkontakte/vkui/dist/components/Typography/Caption/Caption';
 import FixedLayout from '@vkontakte/vkui/dist/components/FixedLayout/FixedLayout';
 import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
 import Separator from '@vkontakte/vkui/dist/components/Separator/Separator';
 import Progress from '@vkontakte/vkui/dist/components/Progress/Progress';
+import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 import Subhead from '@vkontakte/vkui/dist/components/Typography/Subhead/Subhead';
 
 
+
+import Icon28SmileOutline from '@vkontakte/icons/dist/28/smile_outline';
 import Icon28CancelCircleOutline from '@vkontakte/icons/dist/28/cancel_circle_outline';
 import Icon28CancelOutline from '@vkontakte/icons/dist/28/cancel_outline';
 import Icon28CameraOutline from '@vkontakte/icons/dist/28/camera_outline';
@@ -37,11 +41,14 @@ import Icon24CommentOutline from '@vkontakte/icons/dist/24/comment_outline';
 import Icon24ShareOutline from '@vkontakte/icons/dist/24/share_outline';
 import Icon20ViewOutline from '@vkontakte/icons/dist/20/view_outline';
 
+import Icon16LikeOutline from '@vkontakte/icons/dist/16/like_outline';
+
 import './FundDetails.css'
 
 // import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
 
 import cat from '../img/cat.png';
+import { Input } from '@vkontakte/vkui';
 
 const FUND_GOAL = 100;
 const TICK_INTERVAL = 6;
@@ -174,7 +181,7 @@ class FundDetails extends React.Component {
           </Div>
         </Group>
         <Group separator="show">
-          <Div style={{paddingTop: 0}}>
+          <Div style={{paddingTop: 0, paddingBottom: 0}}>
             <div style={{  display: "flex", textAlign: "center", alignItems: "center"}}>
                 <Icon24LikeOutline fill={"var(--content_placeholder_icon)"}/>
                 <div style={{paddingRight: "5px", color: "var(--content_placeholder_icon)"}}>65</div>
@@ -193,16 +200,46 @@ class FundDetails extends React.Component {
             </Div>
         </Group>
         <Separator wide />
-        <FixedLayout vertical="bottom">
+
+        <SimpleCell
+          description="Отправил."
+          disabled
+          before={<Avatar/>}
+          after={<Icon16LikeOutline fill="var(--dynamic_gray)"/>}
+        >
+            <div style={{display: "flex"}}>
+
+                Артур Стамбульцян
+                <div style={{display: "flex", color: "var(--content_placeholder_icon)", paddingLeft: "5px", alignItems: "center"}}>
+                    <Caption level="1" weight="regular"> 5 мин.</Caption>
+                </div>
+            </div>
+        </SimpleCell>
+
+        <Div style={{display: "flex", marginBottom: "60px", alignItems: "center"}}>
+            <Avatar/>
+            <div style={{padding: "5px"}}/>
+            <div style={{flexGrow: 1, position: "relative"}}>
+                <Input placeholder="Комментарий"/>
+                <div style={{position: "absolute", zIndex: 1, top:"50%", transform: "translateY(-50%)", right: "1%"}}>
+                    <Icon28SmileOutline fill="var(--content_placeholder_icon)"/>
+                </div>
+
+            </div>
+        </Div>
+
+
+
+        <FixedLayout vertical="bottom" filled>
           <Separator wide />
           <SimpleCell        
                 disabled
                 after={
                  (this.state.progress !== FUND_GOAL) ?
-                  <Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="outline" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>
+                  <Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="commerce" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>
                   : null
                 }
-                description={<Progress value={Math.ceil(100 * this.state.progress / FUND_GOAL)} />}
+                description={<Progress value={Math.ceil(100 * this.state.progress / FUND_GOAL)} style={{background: "var(--icon_tertiary)"}}/>}
                 >
                   <Subhead weight="regular" className={this.state.progress === FUND_GOAL ? 'text-center' : ''}>
                       {
