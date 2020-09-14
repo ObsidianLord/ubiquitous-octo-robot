@@ -71,7 +71,7 @@ export default class Feed extends React.Component {
                           Артур Стамбульцян
                         </SimpleCell>
                         <Div>
-                            <Text>
+                            <Text style={{marginBottom: 12}}>
                                 {store.description}
                             </Text>
                             <Snippet go={this.state.go} progressValue={80} progressText="Собрано 8 750 ₽ из 10 000 ₽"/>

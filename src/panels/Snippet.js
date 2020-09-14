@@ -26,8 +26,9 @@ export default class Snippet extends React.Component {
     render() {
         return (
             <Card size="l">
+                { store.imageSource &&
                 <img src={store.imageSource}
-                    height={140} width="100%" style={{objectFit: "cover", borderTopLeftRadius: 10, borderTopRightRadius: 10}} alt="Girl in a jacket"/>
+                    height={140} width="100%" style={{objectFit: "cover", borderTopLeftRadius: 10, borderTopRightRadius: 10}} alt="Girl in a jacket"/>}
                 <SimpleCell
                   disabled
                   description={store.author + " · Закончится через 5 дней"}

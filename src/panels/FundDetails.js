@@ -49,9 +49,9 @@ import './FundDetails.css'
 
 import cat from '../img/cat.png';
 import { Input } from '@vkontakte/vkui';
+import { store } from '../store';
 
-const FUND_GOAL = 100;
-const TICK_INTERVAL = 6;
+const TICK_INTERVAL = 10;
 
 class FundDetails extends React.Component {
   constructor(props) {
@@ -62,32 +62,36 @@ class FundDetails extends React.Component {
       interval: null,
       isInnerDivTooShort: true,
       isOuterDivTooShort: false,
+      price: store.price
     };
   }
 
   componentDidMount() {
+    const step = Math.floor(this.state.price / (60000 / TICK_INTERVAL)) ?? 1;
     const interval = setInterval(() => {
-      this.tick();
+      this.tick(step);
     }, TICK_INTERVAL);
     this.setState({
       interval
     });
   }
 
-  tick() {
-    console.log(100 * this.state.progress / FUND_GOAL)
+  tick(step) {
     this.checkWidth();
-    if (this.state.progress < FUND_GOAL) {
+    if (this.state.progress < this.state.price) {
       this.setState({
-        progress: this.state.progress + 1
+        progress: this.state.progress + step
       });
     } else {
+      this.setState({
+        progress: this.state.price
+      });
       clearInterval(this.state.interval);
     }
   }
 
   progressWidth() {
-    return `${100 * this.state.progress / FUND_GOAL}%`
+    return `${100 * this.state.progress / this.state.price}%`
   }
 
   checkWidth() {
@@ -141,7 +145,7 @@ class FundDetails extends React.Component {
         <Group separator="show">
           <Div>
             <Title level="1" weight="bold" style={{ marginBottom: 4 }}>Добряши помогают котикам</Title>
-            <Headline weight="medium" style={{ marginBottom: 4 }}>Headline medium</Headline>
+            <Headline weight="medium" style={{ marginBottom: 4 }}>{`Автор ${store.author}`}</Headline>
             <Text weight="regular">Text regular</Text>
           </Div>
         </Group>
@@ -157,17 +161,17 @@ class FundDetails extends React.Component {
                 className={!this.state.isInnerDivTooShort ? 'd-none' : ''}
               >{this.formattedSum(this.state.progress)}</Text>
               <Text id='goal-text' weight="regular" className={
-                this.state.progress === FUND_GOAL ? 'd-none' :
+                this.state.progress === this.state.price ? 'd-none' :
                 (this.state.isOuterDivTooShort ? 'text-raised' : '')
-              }>{this.formattedSum(FUND_GOAL)}</Text>
+              }>{this.formattedSum(this.state.price)}</Text>
               <div id='progress-inner-div' className='fund-details__progress-inner' style={{
                 width: this.progressWidth()
               }}>
                 <Text id='current-text-inner' weight="regular" className={
-                  this.state.progress === FUND_GOAL ? 'text-center d-block' :
+                  this.state.progress === this.state.price ? 'text-center d-block' :
                   (this.state.isInnerDivTooShort ? 'd-none' : '')
                 }>
-                  {`${this.formattedSum(this.state.progress)}${this.state.progress === FUND_GOAL ? ' собраны!' : ''}`}
+                  {`${this.formattedSum(this.state.progress)}${this.state.progress === this.state.price ? ' собраны!' : ''}`}
                 </Text>
               </div>
             </div>
@@ -176,7 +180,7 @@ class FundDetails extends React.Component {
         <Group separator="show">
           <Div>
             <Text weight="regular">
-              Привет-привет, добряш!
+              {store.description}
             </Text>
           </Div>
         </Group>
@@ -235,17 +239,17 @@ class FundDetails extends React.Component {
           <SimpleCell        
                 disabled
                 after={
-                 (this.state.progress !== FUND_GOAL) ?
+                 (this.state.progress !== this.state.price) ?
                   <Button disabled={this.state.buttonDisabled} onClick={this.state.onClick} mode="commerce" style={{marginRight: 0, marginLeft: 10}}>Помочь</Button>
                   : null
                 }
-                description={<Progress value={Math.ceil(100 * this.state.progress / FUND_GOAL)} style={{background: "var(--icon_tertiary)"}}/>}
+                description={<Progress value={Math.ceil(100 * this.state.progress / this.state.price)} style={{background: "var(--icon_tertiary)"}}/>}
                 >
-                  <Subhead weight="regular" className={this.state.progress === FUND_GOAL ? 'text-center' : ''}>
+                  <Subhead weight="regular" className={this.state.progress === this.state.price ? 'text-center' : ''}>
                       {
-                        this.state.progress !== FUND_GOAL
-                        ? `Собрано ${this.formattedSum(this.state.progress)} из ${this.formattedSum(FUND_GOAL)}`
-                        : `${this.formattedSum(this.state.progress)}${this.state.progress === FUND_GOAL ? ' собраны!' : ''}`
+                        this.state.progress !== this.state.price
+                        ? `Собрано ${this.formattedSum(this.state.progress)} из ${this.formattedSum(this.state.price)}`
+                        : `${this.formattedSum(this.state.progress)}${this.state.progress === this.state.price ? ' собраны!' : ''}`
                       }
                   </Subhead>
               </SimpleCell>
