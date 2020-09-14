@@ -97,7 +97,7 @@ export default class DetailsEditForm extends React.Component {
         }
 
         const actualPrice = NUMBER_FORMAT.format(store.price) + ' ₽'
-        if (price.length + 1 === actualPrice.length) { // one character deleted
+        if (price.length + 1 === actualPrice.length && store.price != null) { // one character deleted
             price = store.price.toString()
             price = price.substring(0, price.length - 1)
             if(price.length === 0) {
