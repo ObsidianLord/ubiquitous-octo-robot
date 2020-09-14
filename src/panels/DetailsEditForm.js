@@ -172,8 +172,8 @@ export default class DetailsEditForm extends React.Component {
     }
 
     canSubmitForm() {
-        const nameDefined = this.state.name !== undefined && this.state.name !== ""
-        const priceDefined = this.state.price !== undefined && this.state.price !== ""
+        const nameDefined = this.state.name && this.state.name !== ""
+        const priceDefined = this.state.price && this.state.price !== ""
         const paymentAccountDefined = true // default value always chosen
         const authorDefined = true // default value always chosen
 

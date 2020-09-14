@@ -73,8 +73,8 @@ export default class AdditionalDetailsEditForm extends React.Component {
     }
 
     canSubmitForm() {
-        const authorDefined = this.state.author !== null
-        const endsDateDefined = this.state.endsDate !== null
+        const authorDefined = this.state.author && this.state.author !== ''
+        const endsDateDefined = this.state.endsDate && this.state.endsDate !== ''
         const mustPickDate = this.state.displayDatePicker
 
         return authorDefined && this.state.fundEndsDefined && (!mustPickDate || endsDateDefined)
