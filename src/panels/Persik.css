@@ -4,3 +4,12 @@
   max-width: 240px;
   margin: 20px auto;
 }
+
+#image {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#file .Button__content {
+  width: 100%
+}

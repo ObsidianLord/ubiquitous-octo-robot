@@ -19,6 +19,11 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import {store, authors} from "../store";
+import {rippleEffect} from "../utils";
+import './Persik.css'
+import Title from "@vkontakte/vkui/dist/components/Typography/Title/Title";
+import Icon56GalleryOutline from "@vkontakte/icons/dist/56/gallery_outline";
+import File from "@vkontakte/vkui/dist/components/File/File";
 
 const REGULAR_FORM_ID = "details-edit-form-regular"
 
@@ -32,6 +37,9 @@ export default class DetailsEditForm extends React.Component {
             id: data.id,
             go: data.go,
 
+            imageLoaded: false,
+            imageSource: undefined,
+
             name: undefined,
             price: undefined,
             goal: undefined,
@@ -40,6 +48,7 @@ export default class DetailsEditForm extends React.Component {
             author: undefined
         };
 
+        this.onImageUpload = this.onImageUpload.bind(this)
         this.onFundNameChange = this.onFundNameChange.bind(this)
         this.onPriceChange = this.onPriceChange.bind(this)
         this.onGoalChange = this.onGoalChange.bind(this)
@@ -47,6 +56,25 @@ export default class DetailsEditForm extends React.Component {
         this.onPaymentAccountChange = this.onPaymentAccountChange.bind(this)
         this.onAuthorChange = this.onAuthorChange.bind(this)
         this.canSubmitForm = this.canSubmitForm.bind(this)
+    }
+
+    onImageUpload(event) {
+        let component = this
+        let target = event.target
+
+        let files = target.files
+        if (files && files[0]) {
+            const reader = new FileReader()
+            reader.onload = function (e) {
+                const imageUrl = e.target.result
+                component.setState({
+                    imageLoaded: true,
+                    imageSource: imageUrl
+                })
+                store.imageSource = imageUrl
+            };
+            reader.readAsDataURL(files[0])
+        }
     }
 
     onFundNameChange(event) {
@@ -118,11 +146,32 @@ export default class DetailsEditForm extends React.Component {
                 >
                     {this.state.id === REGULAR_FORM_ID ? "Регулярный сбор" : "Целевой сбор"}
                 </PanelHeader>
-                <Div>
-                    <Card size="l">
-                        <div style={{height: 140}}/>
-                    </Card>
-                </Div>
+                <div id={'file'}>
+                    {this.state.imageLoaded ?
+                        (
+                            <img id={'image'} src={this.state.imageSource} alt={'loaded image'}
+                                 style={{maxWidth: '100%', height: 'auto'}}/>
+                        ) :
+                        (
+                            <File controlSize={'xl'}
+                                  accept={'image/jpeg, image/png'}
+                                  style={{padding: 0, margin: 0, background: 'transparent'}}
+                                  onChange={this.onImageUpload}>
+                                <Div
+                                    onClick={rippleEffect}
+                                    style={{
+                                        height: '140px',
+                                        display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                        border: '2px #3F8AE0', borderStyle: 'dashed', borderRadius: '10px'
+                                    }}
+                                >
+                                    <Icon56GalleryOutline fill={'royalblue'} height={22} width={22}/>
+                                    <Title style={{color: 'royalblue'}}>Загрузить обложку</Title>
+                                </Div>
+                            </File>
+                        )
+                    }
+                </div>
                 <FormLayout style={{paddingBottom: 60}}>
                     <Input
                         top="Название сбора"

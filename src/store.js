@@ -4,11 +4,13 @@ export const store = {
     goal: undefined,
     description: undefined,
     paymentAccount: undefined,
-    author: undefined
+    author: undefined,
+
+    imageSource: undefined
 };
 
 export const fundTypes = {
-    GOAL: 'GOLAR',
+    GOAL: 'GOAL',
     REGULAR: 'REGULAR',
 }
 
