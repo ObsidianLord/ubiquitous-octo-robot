@@ -42,7 +42,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
         this.onAuthorChosen = this.onAuthorChosen.bind(this)
         this.onFundEndsChosen = this.onFundEndsChosen.bind(this)
         this.onDateChosen = this.onDateChosen.bind(this)
-            this.canSubmitForm = this.canSubmitForm.bind(this)
+        this.canSubmitForm = this.canSubmitForm.bind(this)
     }
 
     componentDidMount() {
@@ -53,17 +53,13 @@ export default class AdditionalDetailsEditForm extends React.Component {
         authors.forEach(author => {
             if (value === author.value) {
                 store.author = author.title
-                this.setState({
-                    ...this.state,
-                    author: author.title
-                })
+                this.setState({author: author.title})
             }
         });
     }
 
     onFundEndsChosen(event, fundEndsAtExactDate) {
         this.setState({
-            ...this.state,
             fundEndsDefined: true,
             displayDatePicker: fundEndsAtExactDate
         })
@@ -131,9 +127,9 @@ export default class AdditionalDetailsEditForm extends React.Component {
                 <FixedLayout vertical="bottom" filled>
                     <Div>
                         <Button size="xl" stretched
-                          onClick={this.state.go} data-to="pre-post"
-                          disabled={!this.canSubmitForm()}>
-                              Создать сбор
+                                onClick={this.state.go} data-to="pre-post"
+                                disabled={!this.canSubmitForm()}>
+                            Создать сбор
                         </Button>
                     </Div>
                 </FixedLayout>

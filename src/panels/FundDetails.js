@@ -129,7 +129,7 @@ class FundDetails extends React.Component {
 
   render() {
     return (
-      <Panel>
+      <Panel id={this.props.id}>
         <img src={cat} height="140" style={{display: 'block', width: '100%', objectFit: 'cover'}}></img>
         <Group separator="show">
           <Div>
