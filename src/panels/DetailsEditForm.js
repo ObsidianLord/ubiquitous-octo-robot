@@ -108,8 +108,8 @@ export default class DetailsEditForm extends React.Component {
         }
 
         const purePrice = price
-            .replaceAll(/\s+₽/g, '')
-            .replaceAll(/\s+/g, '')
+            .replace(/\s+₽/g, '')
+            .replace(/\s+/g, '')
 
         const containsInvalidCharacters = !purePrice.match(/^\d+$/g)
         if (containsInvalidCharacters) {
