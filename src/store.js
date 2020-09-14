@@ -2,6 +2,7 @@ export const store = {
     name: null,
     price: null,
     goal: null,
+    endsDate: null,
     description: null,
     paymentAccount: null,
     author: 'Матвей Правосудов',

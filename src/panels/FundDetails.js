@@ -43,6 +43,8 @@ import Icon20ViewOutline from '@vkontakte/icons/dist/20/view_outline';
 
 import Icon16LikeOutline from '@vkontakte/icons/dist/16/like_outline';
 
+import moment from 'moment';
+
 import './FundDetails.css'
 
 // import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
@@ -144,14 +146,16 @@ class FundDetails extends React.Component {
         <img src={cat} height="140" style={{display: 'block', width: '100%', objectFit: 'cover'}}></img>
         <Group separator="show">
           <Div>
-            <Title level="1" weight="bold" style={{ marginBottom: 4 }}>Добряши помогают котикам</Title>
+            <Title level="1" weight="bold" style={{ marginBottom: 4 }}>{store.name}</Title>
             <Headline weight="medium" style={{ marginBottom: 4 }}>{`Автор ${store.author}`}</Headline>
-            <Text weight="regular">Text regular</Text>
+            <Text weight="regular">
+              Сбор закончится через {moment(store.endsDate).diff(moment(), 'days')} дней
+            </Text>
           </Div>
         </Group>
         <Group separator="show">
           <Div>
-            <Text weight="regular" style={{ marginBottom: 6 }}>Text regular</Text>
+            <Text weight="regular" style={{ marginBottom: 6 }}>Нужно собрать до {`${moment(store.endsDate).format('D MMMM').toLowerCase()}`}</Text>
             
             <div id='progress-outer-div' className='fund-details__progress-outer'>
               <Text

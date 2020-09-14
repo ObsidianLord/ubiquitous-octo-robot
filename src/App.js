@@ -13,6 +13,10 @@ import Feed from './panels/Feed';
 
 import FundDetails from './panels/FundDetails';
 
+import moment from 'moment';
+import 'moment/locale/ru';
+
+
 export default class App extends React.Component {
     constructor(data) {
         super(data)
@@ -22,6 +26,7 @@ export default class App extends React.Component {
             history: []
         };
 
+        moment.locale('ru');
         const state = this.state
         const changeActivePanel = this.changeActivePanel.bind(this)
         window.onpopstate = function(event) {

@@ -66,16 +66,15 @@ export default class AdditionalDetailsEditForm extends React.Component {
     }
 
     onDateChosen(event) {
-        console.log(event.currentTarget)
         this.setState({
             endsDate: event.currentTarget.value
         })
-        console.log(this.state.endsDate)
+        store.endsDate = event.currentTarget.value
     }
 
     canSubmitForm() {
-        const authorDefined = this.state.author !== undefined
-        const endsDateDefined = this.endsDate !== undefined
+        const authorDefined = this.state.author !== null
+        const endsDateDefined = this.state.endsDate !== null
         const mustPickDate = this.state.displayDatePicker
 
         return authorDefined && this.state.fundEndsDefined && (!mustPickDate || endsDateDefined)
