@@ -9,6 +9,8 @@ import TypeChoose from "./panels/TypeChoose";
 import DetailsEditForm from './panels/DetailsEditForm';
 import AdditionalDetailsEditForm from "./panels/AdditionalDetailsEditForm";
 import PrePost from './panels/PrePost';
+import Feed from './panels/Feed';
+
 
 export default class App extends React.Component {
     constructor(data) {
@@ -75,6 +77,7 @@ export default class App extends React.Component {
                 <DetailsEditForm id='details-edit-form-goal' go={this.go} />
                 <AdditionalDetailsEditForm id='additional-details-edit-form' go={this.go} />
                 <PrePost id='pre-post' go={this.go} />
+                <Feed id='feed' go={this.go} />
             </View>
         )
     }
