@@ -39,16 +39,16 @@ export default class DetailsEditForm extends React.Component {
             go: data.go,
 
             imageLoaded: false,
-            imageSource: undefined,
+            imageSource: null,
 
-            name: undefined,
-            price: undefined,
-            goal: undefined,
-            description: undefined,
-            paymentAccount: undefined,
+            name: null,
+            price: null,
+            goal: null,
+            description: null,
+            paymentAccount: null,
 
-            author: undefined,
-            authorValue: undefined
+            author: null,
+            authorValue: null
         };
 
         this.onImageUpload = this.onImageUpload.bind(this)
@@ -137,9 +137,10 @@ export default class DetailsEditForm extends React.Component {
     }
 
     resetImage() {
+        store.imageSource = null;
         this.setState({
             imageLoaded: false,
-            imageSource: undefined
+            imageSource: null
         });
     }
 

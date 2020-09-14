@@ -1,12 +1,11 @@
 export const store = {
-    name: undefined,
-    price: undefined,
-    goal: undefined,
-    description: undefined,
-    paymentAccount: undefined,
-    author: undefined,
-
-    imageSource: undefined
+    name: null,
+    price: null,
+    goal: null,
+    description: null,
+    paymentAccount: null,
+    author: null,
+    imageSource: null
 };
 
 export const fundTypes = {

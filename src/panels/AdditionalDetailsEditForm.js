@@ -28,7 +28,7 @@ export default class AdditionalDetailsEditForm extends React.Component {
             go: props.go,
 
             fundEndsDefined: false,
-            endsDate: undefined,
+            endsDate: null,
             displayDatePicker: false,
         }
 
@@ -66,8 +66,11 @@ export default class AdditionalDetailsEditForm extends React.Component {
     }
 
     onDateChosen(event) {
-        const {name, value} = event.currentTarget
-        console.log("onDateChosen")
+        console.log(event.currentTarget)
+        this.setState({
+            endsDate: event.currentTarget.value
+        })
+        console.log(this.state.endsDate)
     }
 
     canSubmitForm() {
@@ -115,6 +118,8 @@ export default class AdditionalDetailsEditForm extends React.Component {
                                placeholder="Выберите дату"
                                name={"dateEnds"}
                                min={dateToFormat(new Date())}
+                               className={this.state.endsDate ? 'full' : ''}
+                               value={this.endsDate}
                                onChange={this.onDateChosen}
                                required
                         />

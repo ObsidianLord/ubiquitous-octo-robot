@@ -18,7 +18,7 @@ export default class App extends React.Component {
         super(data)
 
         this.state = {
-            activePanel: "details-edit-form-regular",
+            activePanel: "home",
             history: []
         };
 

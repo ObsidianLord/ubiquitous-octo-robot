@@ -13,3 +13,17 @@
 #file .Button__content {
   width: 100%
 }
+
+/* input[type="date"]:not(.full):before{
+  color: var(--content_placeholder_text);
+  content: attr(placeholder);
+}
+
+input[type="date"]:not(.full) {
+  color: rgba(0, 0, 0, 0);
+} */
+
+#pre-post .FormField__border {
+  background: none !important;
+  border: none !important;
+}
