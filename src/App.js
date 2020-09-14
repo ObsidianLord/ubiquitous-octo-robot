@@ -22,22 +22,18 @@ export default class App extends React.Component {
             history: []
         };
 
-        // window.onpopstate = function(event) {
-        //     if (state.history.length > 0) {
-        //         const pair = state.history.pop();
-        //         setState({
-        //             activeStory: pair.story,
-        //             activePanel: pair.panel,
-        //             prev_story: obj.state.activeStory
-        //         });
-        //     } else {
-        //     }
-        // }
+        const state = this.state
+        const changeActivePanel = this.changeActivePanel.bind(this)
+        window.onpopstate = function(event) {
+            if (state.history.length > 0) {
+                changeActivePanel("back")
+            } else {
+            }
+        }
         this.go = this.go.bind(this);
     }
 
-    go(event){
-        const toPanel = event.currentTarget.dataset.to
+    changeActivePanel(toPanel) {
         if (toPanel == "back") {
             const previousPanel = this.state.history.pop()
             console.log("BACK TO " + previousPanel)
@@ -46,10 +42,16 @@ export default class App extends React.Component {
             })
         } else {
             this.state.history.push(this.state.activePanel)
+            window.history.pushState({}, "")
             this.setState({
                 activePanel: toPanel
             });
         }
+    }
+
+    go(event){
+        const toPanel = event.currentTarget.dataset.to
+        this.changeActivePanel(toPanel)
     };
 
     componentDidMount() {
