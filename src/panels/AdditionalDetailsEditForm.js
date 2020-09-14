@@ -128,9 +128,13 @@ export default class AdditionalDetailsEditForm extends React.Component {
 
                 </FormLayout>
 
-                <FixedLayout vertical="bottom">
+                <FixedLayout vertical="bottom" filled>
                     <Div>
-                        <Button size="xl" stretched disabled={!this.canSubmitForm()}>Создать сбор</Button>
+                        <Button size="xl" stretched
+                          onClick={this.state.go} data-to="pre-post"
+                          disabled={!this.canSubmitForm()}>
+                              Создать сбор
+                        </Button>
                     </Div>
                 </FixedLayout>
             </Panel>
