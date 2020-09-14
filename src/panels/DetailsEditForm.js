@@ -148,7 +148,7 @@ export default class DetailsEditForm extends React.Component {
         paymentAccounts.forEach(paymentAccount => {
             if (paymentAccountValue === paymentAccount.value) {
                 setStore({paymentAccount: paymentAccount.title})
-                this.setState({author: paymentAccount.title, authorValue: paymentAccount.value})
+                this.setState({paymentAccount: paymentAccount.value})
             }
         });
     }
@@ -226,7 +226,7 @@ export default class DetailsEditForm extends React.Component {
                                     }}
                                 >
                                     <Icon56GalleryOutline fill={'var(--accent)'} height={22} width={22} style={{marginRight: 11}}/>
-                                    <Title style={{color: 'var(--accent)', marginBottom: 2}}>Загрузить обложку</Title>
+                                    <Title style={{color: 'var(--accent)'}}>Загрузить обложку</Title>
                                 </Div>
                             </File>
                         )

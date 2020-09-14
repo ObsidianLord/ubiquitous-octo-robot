@@ -24,7 +24,7 @@ const Home = ({ id, go }) => (
           size="l"
           data-to="type-choose"
           onClick={go}
-        >Создать Сбор</Button>
+        >Создать сбор</Button>
       </Div>
     </Div>
   </Panel>

@@ -45,6 +45,8 @@ import Icon16LikeOutline from '@vkontakte/icons/dist/16/like_outline';
 
 import moment from 'moment';
 
+import avatar from '../img/avatar-1.png';
+
 import './FundDetails.css'
 
 // import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
@@ -69,7 +71,8 @@ class FundDetails extends React.Component {
   }
 
   componentDidMount() {
-    const step = Math.floor(this.state.price / (60000 / TICK_INTERVAL)) ?? 1;
+    let step = Math.floor(this.state.price / (60000 / TICK_INTERVAL));
+    step = step < 1 ? 1 : step;
     const interval = setInterval(() => {
       this.tick(step);
     }, TICK_INTERVAL);
@@ -225,7 +228,7 @@ class FundDetails extends React.Component {
         <SimpleCell
           description="Отправил."
           disabled
-          before={<Avatar/>}
+          before={<Avatar src={avatar}/>}
           after={<Icon16LikeOutline fill="var(--dynamic_gray)"/>}
         >
             <div style={{display: "flex"}}>
@@ -238,7 +241,7 @@ class FundDetails extends React.Component {
         </SimpleCell>
 
         <Div style={{display: "flex", marginBottom: "60px", alignItems: "center"}}>
-            <Avatar/>
+            <Avatar src={avatar}/>
             <div style={{padding: "5px"}}/>
             <div style={{flexGrow: 1, position: "relative"}}>
                 <Input placeholder="Комментарий"/>

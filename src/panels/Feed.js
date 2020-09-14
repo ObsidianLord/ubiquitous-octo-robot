@@ -41,6 +41,7 @@ import Icon20ViewOutline from '@vkontakte/icons/dist/20/view_outline';
 
 import '@vkontakte/vkui/dist/vkui.css';
 import { getStore, fundTypes } from '../store.js';
+import avatar from '../img/avatar-1.png';
 
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -65,7 +66,7 @@ export default class Feed extends React.Component {
                     <Card size="l" mode="outline">
                         <SimpleCell
                           description="час назад"
-                          before={<Avatar/>}
+                          before={<Avatar src={avatar}/>}
                           after={<Icon24MoreHorizontal fill="var(--dynamic_gray)"/>}
                         >
                           Артур Стамбульцян
@@ -112,7 +113,7 @@ export default class Feed extends React.Component {
                     <TabsItem>Интересное</TabsItem>
                   </Tabs>
                 </PanelHeader>
-                <div style={{paddingBottom: 60, backgroundColor: "var(--background_page)"}}>
+                <div style={{paddingBottom: 72, backgroundColor: "var(--background_page)"}}>
                     {feedElement}
                     <Div/>
                     {feedElement}

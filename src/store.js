@@ -6,7 +6,7 @@ var store = {
     description: null,
     fundType: null,
     paymentAccount: null,
-    author: null,
+    author: 'Матвей Правосудов',
     imageSource: null
 };
 

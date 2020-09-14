@@ -1,34 +1,15 @@
-[<img width="134" src="https://vk.com/images/apps/mini_apps/vk_mini_apps_logo.svg">](https://vk.com/services)
+### Соответствие версий кода присланным развернутым приложениям участников:
+1. **Глеб Лебеденко https://vk.com/obsidianlord**
+ * Код: https://github.com/ObsidianLord/ubiquitous-octo-robot
+ * Mini App: https://vk.com/app7595126
+ * Web: https://vk-vezdecode-bepis.surge.sh/
+2. **Михаил Гостев https://vk.com/mihun4ik**
+ * Код: https://github.com/ObsidianLord/ubiquitous-octo-robot/commit/8189be1cdd573892b9bd0c1ab4ec2497b61b50fd
+ * Mini App: https://vk.com/app7595299
+ * Web: https://vk-vezdecode-gostev-bepis.surge.sh
 
-# Create VK Mini App [![npm][npm]][npm-url] [![deps][deps]][deps-url]
-
-## How to install
-
-### Create VK Mini App with gh-pages deploy
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name>`
-
-### Create VK Mini App with Zeit deploy
-
-Firstly, you have to create Zeit account and connect it with your GitHub profile — https://zeit.co/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --zeit`
-
-### Create VK Mini App with Surge deploy
-
-Firstly, you have to create Surge account and Surge-domain — https://surge.sh/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --surge <surge-domain>`
-
-## How to start work with app
-
-Go to created folder and run:
-`yarn start` || `npm start` — this will start dev server with hot reload on `localhost:10888`.
-
-`yarn run build` || `npm run build` — this will build production bundle, with tree-shaking, uglify and all this modern fancy stuff
-
-[npm]: https://img.shields.io/npm/v/@vkontakte/create-vk-mini-app.svg
-[npm-url]: https://npmjs.com/package/@vkontakte/create-vk-mini-app
-
-[deps]: https://img.shields.io/david/vkcom/create-vk-mini-app.svg
-[deps-url]: https://david-dm.org/vkcom/create-vk-mini-app
+### Главные фичи:
+1. Обработано нативное событие возвращения среды (кнопки назад на android и в браузере);
+2. Реализованы динамические сниппет, экран ленты и экран просмотра пожертвования;
+3. На экране просмотра пожертвования реализованы анимации и обработы разные состояния прогресс бара;
+4. Вручную собранная инпут маска для поля ввода суммы пожертвования.
