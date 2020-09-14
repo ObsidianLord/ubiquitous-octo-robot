@@ -157,9 +157,9 @@ export default class DetailsEditForm extends React.Component {
                 <div id={'file'}>
                     {this.state.imageLoaded ?
                         (
-                            <div style={{margin: '0 12px', position: 'relative', borderRadius: '10px'}}>
+                            <div style={{margin: '0 12px', position: 'relative'}}>
                                 <img id={'image'} src={this.state.imageSource} alt={'loaded image'}
-                                 style={{display: 'block', height: '170px', objectFit: 'cover', width: '100%', margin: '11px 0'}}/>
+                                 style={{display: 'block', height: '170px', objectFit: 'cover', width: '100%', margin: '11px 0', borderRadius: '10px'}}/>
                                 <div style={{position: 'absolute', right: 8, top: 8}}>
                                     <Icon24DismissOverlay onClick={()=>{this.resetImage()}}></Icon24DismissOverlay>
                                 </div>
